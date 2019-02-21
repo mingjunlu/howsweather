@@ -1,6 +1,7 @@
 html {
     box-sizing: border-box;
     font-size: 62.5%;
+    min-height: 100vh;
 }
 
 *, *:before, *:after {
@@ -10,4 +11,9 @@ html {
 body {
     font-family: "Helvetica Neue", Helvetica, "PingFang TC", "STHeitiTC", "Microsoft JhengHei", Arial, sans-serif;
     font-size: $m-size;
+    min-height: 100vh;
+}
+
+h1, p {
+    margin: 0;
 }
