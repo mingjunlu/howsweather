@@ -5,7 +5,7 @@ import 'dayjs/locale/zh-tw'
 import Error from './Error'
 import Loading from './Loading'
 import Details from './Details'
-import { weatherToIcon } from '../functions/helper.js'
+import { weatherToIcon, syncTheme } from '../functions/helper.js'
 
 
 dayjs.locale('zh-tw')   // 設定語系
@@ -20,6 +20,7 @@ class App extends React.Component {
     state = {
         isLoading: true,
         somethingWrong: false,
+        icon: '',
         summary: '',
         temperature: undefined,
         reminder: '',
@@ -74,6 +75,7 @@ class App extends React.Component {
             this.setState({
                 isLoading: false,
                 somethingWrong: false,
+                icon: currently.icon,
                 summary: currently.summary,
                 temperature: currently.temperature,
                 reminder: daily.summary,
@@ -90,6 +92,7 @@ class App extends React.Component {
         const {
             isLoading,
             somethingWrong,
+            icon,
             summary,
             temperature,
             reminder,
@@ -97,6 +100,11 @@ class App extends React.Component {
             dailyData,
             details
         } = this.state
+
+        // 根據目前天氣更新背景顏色
+        const appRoot = document.getElementById('root')
+        appRoot.style.background = syncTheme(icon)
+
         return somethingWrong ? <Error />
             : isLoading ? <Loading />
             : (

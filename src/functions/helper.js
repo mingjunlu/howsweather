@@ -77,9 +77,10 @@ const weatherToIcon = (description) => {
 
 const syncTheme = (description) => {
     const lightTheme = 'linear-gradient(345deg, ' +
-        'rgba(85, 165, 200, 0.85) 0%, rgba(35, 130, 190, 0.8) 40%)'
+    'rgba(85, 165, 200, 0.85) 0%, rgba(35, 130, 190, 0.8) 40%)'
     const darkTheme = 'linear-gradient(170deg, ' +
-            'rgba(124, 133, 134, 1) 0%, rgba(81, 101, 117, 1) 45%)'
+    'rgba(124, 133, 134, 1) 0%, rgba(81, 101, 117, 1) 45%)'
+    if (!description) {return lightTheme}
     switch (description) {
         case 'clear-day':
         case 'partly-cloudy-day':

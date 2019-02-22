@@ -1,18 +1,12 @@
 #root {
     min-height: 100vh;
-    // 亮色背景
-    background: $blue;
-    background: $blue-gradient;
-    // 暗色背景
-    background: $gray;
-    background: $gray-gradient;
 }
 
 .app-container {
     color: $white;
     padding: 3.2rem 0;
-    max-width: 480px;   // 手機版 only
-    margin: 0 auto;     // 手機版 only
+    max-width: 480px;
+    margin: 0 auto;
 }
 
 .current {
