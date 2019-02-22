@@ -2,7 +2,7 @@ import React from 'react'
 import dayjs from 'dayjs'
 dayjs.locale('zh-tw')   // 設定語系
 
-const Details = ({ data }) =>  (
+const WeatherDetails = ({ data }) =>  (
     <div className="details">
         {withUnits(data).map(({ engTag, tag, text }) => (
             <p key={engTag} className="details__segment">
@@ -96,4 +96,4 @@ function withUnits(obj) {
     })
 }
 
-export default Details
+export default WeatherDetails

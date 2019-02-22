@@ -1,0 +1,23 @@
+.weather-card {
+    text-align: center;
+    display: inline-block;
+    margin-right: 3.1rem;
+    min-height: 4.8rem;
+}
+
+.weather-card__time {
+    font-size: $s-size;
+}
+
+.weather-card__pop {
+    margin-top: 0.2rem;
+    font-size: 1.0rem;
+}
+
+.weather-card__icon {
+    margin-top: $tiny-size;
+}
+
+.weather-card__temp {
+    margin-top: $xs-size;
+}

@@ -1,11 +1,16 @@
+// Libraries
 import React from 'react'
-import IconWrapper from './shared/IconWrapper'
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-tw'
+// Functions
+import { syncTheme } from '../functions/helper.js'
+// Components
 import Error from './Error'
 import Loading from './Loading'
-import Details from './Details'
-import { weatherToIcon, syncTheme } from '../functions/helper.js'
+import CurrentWeather from './CurrentWeather'
+import WeatherSegment from './WeatherSegment'
+import WeatherCard from './WeatherCard'
+import WeatherDetails from './WeatherDetails'
 
 
 dayjs.locale('zh-tw')   // 設定語系
@@ -109,55 +114,28 @@ class App extends React.Component {
             : isLoading ? <Loading />
             : (
             <div className="app-container">
-                <div className="current">
-                    <p className="current__location">臺北市</p>
-                    <p className="current__summary">{summary}</p>
-                    <p className="current__temperature">
-                        {Math.round(temperature)}
-                    </p>
-                </div>
+                <CurrentWeather
+                    location="臺北市"
+                    summary={summary}
+                    temperature={temperature}
+                />
                 <div className="hourly-forecast">
-                    <div className={ 'weather-segment' +
-                        ' weather-segment--displaying'
-                    }>
-                        <p className="weather-segment__day">
-                            <span>{dayjs.unix(dailyData[0].time).format('dddd')}</span>
-                            <span className="weather-segment__date">今天</span>
-                        </p>
-                        <p className="weather-segment__temp">
-                            <span>{Math.round(dailyData[0].maxTemp)}</span>
-                            <span className="weather-segment__min-temp">
-                                {Math.round(dailyData[0].minTemp)}
-                            </span>
-                        </p>
-                    </div>
+                    <WeatherSegment
+                        time={dailyData[0].time}
+                        note="今天"
+                        maxTemp={dailyData[0].maxTemp}
+                        minTemp={dailyData[0].minTemp}
+                        className="weather-segment--displaying"
+                    />
                     <div className="cards-container">
                         {hourlyData.map(item => (
-                            <div key={item.time} className="weather-card">
-                            <p className="weather-card__time">
-                                {dayjs().isSame(dayjs.unix(item.time), 'hour') ?
-                                    '現在' :
-                                    new Date(item.time * 1000)
-                                        .toLocaleTimeString()
-                                        .slice(0, 3) + '時'
-                                }
-                            </p>
-                            <p
-                                className="weather-card__pop"
-                                style={{ visibility: item.chanceOfRain < 0.05 ?
-                                    'hidden' : 'visible'
-                                }}
-                            >
-                                {`${Math.round(item.chanceOfRain * 10) * 10}%`}
-                            </p>
-                            <IconWrapper
-                                icon={weatherToIcon(item.icon)}
-                                className="weather-card__icon"
+                            <WeatherCard
+                                key={item.time}
+                                time={item.time}
+                                chanceOfRain={item.chanceOfRain}
+                                icon={item.icon}
+                                temperature={item.temperature}
                             />
-                            <p className="weather-card__temp">
-                                {`${Math.round(item.temperature)}°`}
-                            </p>
-                            </div>
                         ))}
                     </div>
                 </div>
@@ -165,24 +143,18 @@ class App extends React.Component {
                     {dailyData.map(item =>
                         dayjs().isSame(dayjs.unix(item.time), 'date') ?
                             null : (
-                            <div key={item.time} className="weather-segment">
-                                <p>{dayjs.unix(item.time).format('dddd')}</p>
-                                <IconWrapper
-                                    icon={weatherToIcon(item.icon)}
-                                    className="weather-segment__icon"
-                                />
-                                <p className="weather-segment__temp">
-                                    <span>{Math.round(item.maxTemp)}</span>
-                                    <span className="weather-segment__min-temp">
-                                        {Math.round(item.minTemp)}
-                                    </span>
-                                </p>
-                            </div>
+                            <WeatherSegment
+                                key={item.time}
+                                time={item.time}
+                                icon={item.icon}
+                                maxTemp={item.maxTemp}
+                                minTemp={item.minTemp}
+                            />
                         )
                     )}
                 </div>
                 <p className="reminder">{reminder.replace(/周/g, '週')}</p>
-                <Details data={details} />
+                <WeatherDetails data={details} />
             </div>
         )
     }

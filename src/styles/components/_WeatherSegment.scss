@@ -1,0 +1,39 @@
+.weather-segment--displaying {
+    padding: $xs-size $m-size;
+}
+
+.weather-segment {
+    margin-top: $xs-size;
+    display: flex;
+    justify-content: space-between;
+}
+
+.weather-segment:first-of-type {
+    margin-top: 0;
+}
+
+.weather-segment__day {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-basis: 7.6rem;
+}
+
+.weather-segment__date {
+    font-size: 0.6em;
+}
+
+.weather-segment__icon {
+    position: relative;
+    left: 4px;
+}
+
+.weather-segment__temp {
+    display: inline-flex;
+    justify-content: space-between;
+    flex-basis: 5.6rem;
+}
+
+.weather-segment__min-temp {
+    opacity: 0.6;
+}
