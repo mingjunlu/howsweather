@@ -1,5 +1,18 @@
-#root {
+.background-overlay {
     min-height: 100vh;
+    --theme-color: $blue-gradient;
+}
+
+.background-overlay::before {
+    content: "";
+    height: 100vh;
+    background: var(--theme-color);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
 }
 
 .app-container {
@@ -36,7 +49,6 @@
     background-color: rgba(250, 250, 250, 0.8);
 }
 
-
 .daily-forecast {
     padding: $xs-size $m-size;
     border-top: 1px solid rgba($white, 0.4);
@@ -44,6 +56,7 @@
 
 .reminder {
     text-align: justify;
+    line-height: 1.4;
     border-top: 1px solid rgba($white, 0.4);
     padding: $xs-size $m-size;
     text-shadow: 1px 3px 3px rgba(60, 60, 60, 0.1);
@@ -56,7 +69,7 @@
 }
 
 @media (min-width: 768px) and (orientation: landscape) {
-    #root {
+    .background-overlay {
         display: flex;
         justify-content: center;
         align-items: center;

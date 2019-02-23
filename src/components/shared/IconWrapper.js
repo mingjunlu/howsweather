@@ -2,10 +2,21 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const IconWrapper = ({
-    icon=null, className=null, spin=false, fixedWidth=true
+    style=null,
+    icon=null,
+    className=null,
+    spin=false,
+    fixedWidth=true
 }) => (icon && (
-    <div className={className && ` ${className}`}>
-        <FontAwesomeIcon spin={spin} fixedWidth={fixedWidth} icon={icon} />
+    <div
+        className={className && `${className}`}
+        style={{ display: 'inline-block', ...style }}
+    >
+        <FontAwesomeIcon
+            spin={spin}
+            fixedWidth={fixedWidth}
+            icon={icon}
+        />
     </div>
 ))
 

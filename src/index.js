@@ -14,6 +14,7 @@ import {
     faWind,
     faSmog,
     faSnowflake,
+    faCaretSquareDown
 } from '@fortawesome/free-solid-svg-icons'
 import App from './components/App'
 import 'normalize.css/normalize.css'
@@ -32,6 +33,7 @@ library.add(
     faWind,
     faSmog,
     faSnowflake,
+    faCaretSquareDown
 )
 
 ReactDOM.render(<App />, document.getElementById('root'))

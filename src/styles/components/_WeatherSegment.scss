@@ -16,11 +16,11 @@
     display: inline-flex;
     justify-content: space-between;
     align-items: baseline;
-    flex-basis: 7.6rem;
 }
 
 .weather-segment__date {
     font-size: 0.6em;
+    margin-left: $xs-size;
 }
 
 .weather-segment__icon {

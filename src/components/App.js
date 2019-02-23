@@ -2,8 +2,6 @@
 import React from 'react'
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-tw'
-// Functions
-import { syncTheme } from '../functions/helper.js'
 // Components
 import Error from './Error'
 import Loading from './Loading'
@@ -11,6 +9,8 @@ import CurrentWeather from './CurrentWeather'
 import WeatherSegment from './WeatherSegment'
 import WeatherCard from './WeatherCard'
 import WeatherDetails from './WeatherDetails'
+// Functions
+import { syncTheme } from '../functions/helper'
 
 
 dayjs.locale('zh-tw')   // 設定語系
@@ -34,6 +34,7 @@ class App extends React.Component {
         details: {}
     }
     async componentDidMount() {
+        console.log('App.js is mounted')
         try {
             const resp = await fetch(darkSkyUrl)
             const data = await resp.json()
@@ -106,55 +107,56 @@ class App extends React.Component {
             details
         } = this.state
 
-        // 根據目前天氣更新背景顏色
-        const appRoot = document.getElementById('root')
-        appRoot.style.background = syncTheme(icon)
-
         return somethingWrong ? <Error />
             : isLoading ? <Loading />
             : (
-            <div className="app-container">
-                <CurrentWeather
-                    location="臺北市"
-                    summary={summary}
-                    temperature={temperature}
-                />
-                <div className="hourly-forecast">
-                    <WeatherSegment
-                        time={dailyData[0].time}
-                        note="今天"
-                        maxTemp={dailyData[0].maxTemp}
-                        minTemp={dailyData[0].minTemp}
-                        className="weather-segment--displaying"
+            <div
+                className="background-overlay"
+                style={{ '--theme-color': syncTheme(icon) }}
+            >
+                <div className="app-container">
+                    <CurrentWeather
+                        location="臺北市"
+                        summary={summary}
+                        temperature={temperature}
                     />
-                    <div className="cards-container">
-                        {hourlyData.map(item => (
-                            <WeatherCard
-                                key={item.time}
-                                time={item.time}
-                                chanceOfRain={item.chanceOfRain}
-                                icon={item.icon}
-                                temperature={item.temperature}
-                            />
-                        ))}
+                    <div className="hourly-forecast">
+                        <WeatherSegment
+                            time={dailyData[0].time}
+                            note="今天"
+                            maxTemp={dailyData[0].maxTemp}
+                            minTemp={dailyData[0].minTemp}
+                            className="weather-segment--displaying"
+                        />
+                        <div className="cards-container">
+                            {hourlyData.map(item => (
+                                <WeatherCard
+                                    key={item.time}
+                                    time={item.time}
+                                    chanceOfRain={item.chanceOfRain}
+                                    icon={item.icon}
+                                    temperature={item.temperature}
+                                />
+                            ))}
+                        </div>
                     </div>
+                    <div className="daily-forecast">
+                        {dailyData.map(item =>
+                            dayjs().isSame(dayjs.unix(item.time), 'date') ?
+                                null : (
+                                <WeatherSegment
+                                    key={item.time}
+                                    time={item.time}
+                                    icon={item.icon}
+                                    maxTemp={item.maxTemp}
+                                    minTemp={item.minTemp}
+                                />
+                            )
+                        )}
+                    </div>
+                    <p className="reminder">{reminder.replace(/周/g, '週')}</p>
+                    <WeatherDetails data={details} />
                 </div>
-                <div className="daily-forecast">
-                    {dailyData.map(item =>
-                        dayjs().isSame(dayjs.unix(item.time), 'date') ?
-                            null : (
-                            <WeatherSegment
-                                key={item.time}
-                                time={item.time}
-                                icon={item.icon}
-                                maxTemp={item.maxTemp}
-                                minTemp={item.minTemp}
-                            />
-                        )
-                    )}
-                </div>
-                <p className="reminder">{reminder.replace(/周/g, '週')}</p>
-                <WeatherDetails data={details} />
             </div>
         )
     }
