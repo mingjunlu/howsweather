@@ -5,26 +5,31 @@ import 'dayjs/locale/zh-tw'
 // Components
 import Error from './Error'
 import Loading from './Loading'
+import SearchModal from './SearchModal'
 import CurrentWeather from './CurrentWeather'
 import WeatherSegment from './WeatherSegment'
 import WeatherCard from './WeatherCard'
 import WeatherDetails from './WeatherDetails'
 // Functions
-import { syncTheme } from '../functions/helper'
+import { syncTheme, coordList, coordsToName } from '../functions/helper'
 
 
 dayjs.locale('zh-tw')   // 設定語系
 const prefix = '//cors-anywhere.herokuapp.com'
 const base = 'https://api.darksky.net/forecast'
 const key = process.env.REACT_APP_DARK_SKY_KEY
-const coordinates = '25.038062,121.564448'  // 臺北市
+let coordinates = '25.038062,121.564448'  // 臺北市
+coordinates = coordList[Math.floor(Math.random() * coordList.length)]
 const suffix = 'lang=zh-tw&units=si&exclude=flags'
 const darkSkyUrl = `${prefix}/${base}/${key}/${coordinates}?${suffix}`
 
 class App extends React.Component {
     state = {
+        isModalOpen: false,
         isLoading: true,
         somethingWrong: false,
+        latitude: undefined,
+        longitude: undefined,
         icon: '',
         summary: '',
         temperature: undefined,
@@ -34,7 +39,6 @@ class App extends React.Component {
         details: {}
     }
     async componentDidMount() {
-        console.log('App.js is mounted')
         try {
             const resp = await fetch(darkSkyUrl)
             const data = await resp.json()
@@ -81,6 +85,8 @@ class App extends React.Component {
             this.setState({
                 isLoading: false,
                 somethingWrong: false,
+                latitude: data.latitude,
+                longitude: data.longitude,
                 icon: currently.icon,
                 summary: currently.summary,
                 temperature: currently.temperature,
@@ -94,10 +100,19 @@ class App extends React.Component {
             this.setState({isLoading: false, somethingWrong: true})
         }
     }
+    handleOpenModal = () => {
+        this.setState({ isModalOpen: true })
+    }
+    handleCloseModal = () => {
+        this.setState({ isModalOpen: false })
+    }
     render() {
         const {
             isLoading,
             somethingWrong,
+            isModalOpen,
+            latitude,
+            longitude,
             icon,
             summary,
             temperature,
@@ -112,13 +127,24 @@ class App extends React.Component {
             : (
             <div
                 className="background-overlay"
-                style={{ '--theme-color': syncTheme(icon) }}
+                style={{
+                    '--theme-color': syncTheme(icon),
+                    height: isModalOpen && '100vh',
+                    overflow: isModalOpen && 'auto'
+                }}
             >
+                {isModalOpen && (
+                    <SearchModal
+                        isOpen={isModalOpen}
+                        handleCloseModal={this.handleCloseModal}
+                    />
+                )}
                 <div className="app-container">
                     <CurrentWeather
-                        location="臺北市"
+                        location={coordsToName(latitude, longitude)}
                         summary={summary}
                         temperature={temperature}
+                        handleOpenModal={this.handleOpenModal}
                     />
                     <div className="hourly-forecast">
                         <WeatherSegment

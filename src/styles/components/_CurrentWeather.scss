@@ -9,6 +9,21 @@
     text-shadow: 1px 3px 3px rgba(60, 60, 60, 0.1);
 }
 
+.current__city-wrapper {
+    display: inline-flex;
+    align-items: center;
+    margin-left: calc(0.2rem + 15px);
+}
+
+.current__city-wrapper:hover {
+    cursor: pointer;
+}
+
+.city-wrapper__icon {
+    font-size: 1.2rem;
+    margin-left: $tiny-size;
+}
+
 .current__summary {
     text-align: center;
     text-shadow: 1px 3px 3px rgba(60, 60, 60, 0.1);
@@ -32,6 +47,12 @@
     content: "°";
     font-size: 0.8em;
     vertical-align: top;
+}
+
+@media (min-width: 768px) {
+    .city-name-input {
+        max-width: 105px;
+    }
 }
 
 @media (min-width: 768px) and (orientation: landscape) {
