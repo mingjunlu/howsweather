@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
+import WebFont from 'webfontloader'
 import {
     faCircleNotch,
     faExclamationTriangle,
@@ -20,6 +21,13 @@ import {
 import AppRouter from './AppRouter'
 import 'normalize.css/normalize.css'
 import './styles/styles.scss'
+
+
+WebFont.load({
+    google: {
+        families: ['Work Sans:200']
+    }
+})
 
 library.add(
     faCircleNotch,
