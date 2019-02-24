@@ -1,6 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import IconWrapper from './shared/IconWrapper'
 import { cityList } from '../functions/helper'
+
 
 class SearchModal extends React.Component {
     state = {
@@ -35,6 +37,7 @@ class SearchModal extends React.Component {
                             type="search"
                             placeholder="搜尋"
                             autoComplete="off"
+                            autoFocus={true}
                             value={keyword}
                             onChange={this.handleInput}
                         />
@@ -49,9 +52,10 @@ class SearchModal extends React.Component {
                 </div>
                 {keyword && cityList.map(city => {
                     const newKeyword = keyword.replace(/台/g, '臺')
-                    return city.includes(newKeyword) ? (
-                        <div
-                            key={city}
+                    return city.name.includes(newKeyword) ? (
+                        <Link
+                            key={city.engName}
+                            to={`/${city.engName}/`}
                             className="search-modal__matched"
                         >
                             <IconWrapper
@@ -60,7 +64,7 @@ class SearchModal extends React.Component {
                                     ' search-modal__icon--small'
                                 }
                             />
-                            {city.split('').map(word => (
+                            {city.name.split('').map(word => (
                                 <span
                                     key={word}
                                     className={newKeyword.includes(word) ?
@@ -74,7 +78,7 @@ class SearchModal extends React.Component {
                                     }
                                 </span>
                             ))}
-                        </div>
+                        </Link>
                     ) : null
                 })}
             </div>

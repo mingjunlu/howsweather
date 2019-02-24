@@ -14,9 +14,10 @@ import {
     faWind,
     faSmog,
     faSnowflake,
-    faSearch
+    faSearch,
+    faCrow
 } from '@fortawesome/free-solid-svg-icons'
-import App from './components/App'
+import AppRouter from './AppRouter'
 import 'normalize.css/normalize.css'
 import './styles/styles.scss'
 
@@ -33,7 +34,8 @@ library.add(
     faWind,
     faSmog,
     faSnowflake,
-    faSearch
+    faSearch,
+    faCrow
 )
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<AppRouter />, document.getElementById('root'))

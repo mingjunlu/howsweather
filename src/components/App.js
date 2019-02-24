@@ -3,33 +3,24 @@ import React from 'react'
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-tw'
 // Components
-import Error from './Error'
-import Loading from './Loading'
+import Error from './shared/Error'
+import Loading from './shared/Loading'
 import SearchModal from './SearchModal'
 import CurrentWeather from './CurrentWeather'
 import WeatherSegment from './WeatherSegment'
 import WeatherCard from './WeatherCard'
 import WeatherDetails from './WeatherDetails'
 // Functions
-import { syncTheme, coordList, coordsToName } from '../functions/helper'
+import { syncTheme, getCityInfo } from '../functions/helper'
 
 
 dayjs.locale('zh-tw')   // 設定語系
-const prefix = '//cors-anywhere.herokuapp.com'
-const base = 'https://api.darksky.net/forecast'
-const key = process.env.REACT_APP_DARK_SKY_KEY
-let coordinates = '25.038062,121.564448'  // 臺北市
-coordinates = coordList[Math.floor(Math.random() * coordList.length)]
-const suffix = 'lang=zh-tw&units=si&exclude=flags'
-const darkSkyUrl = `${prefix}/${base}/${key}/${coordinates}?${suffix}`
 
 class App extends React.Component {
     state = {
         isModalOpen: false,
         isLoading: true,
         somethingWrong: false,
-        latitude: undefined,
-        longitude: undefined,
         icon: '',
         summary: '',
         temperature: undefined,
@@ -39,6 +30,16 @@ class App extends React.Component {
         details: {}
     }
     async componentDidMount() {
+        const { pathname } = this.props.location
+        const coordinates = (pathname.length > 1) ?
+            getCityInfo(pathname.replace(/\//g, '')).coords :
+            '25.038062,121.564448'  // 臺北市座標
+        const prefix = '//cors-anywhere.herokuapp.com'
+        const base = 'https://api.darksky.net/forecast'
+        const key = process.env.REACT_APP_DARK_SKY_KEY
+        const suffix = 'lang=zh-tw&units=si&exclude=flags'
+        const darkSkyUrl = `${prefix}/${base}/${key}/${coordinates}?${suffix}`
+
         try {
             const resp = await fetch(darkSkyUrl)
             const data = await resp.json()
@@ -85,8 +86,6 @@ class App extends React.Component {
             this.setState({
                 isLoading: false,
                 somethingWrong: false,
-                latitude: data.latitude,
-                longitude: data.longitude,
                 icon: currently.icon,
                 summary: currently.summary,
                 temperature: currently.temperature,
@@ -111,8 +110,6 @@ class App extends React.Component {
             isLoading,
             somethingWrong,
             isModalOpen,
-            latitude,
-            longitude,
             icon,
             summary,
             temperature,
@@ -121,6 +118,11 @@ class App extends React.Component {
             dailyData,
             details
         } = this.state
+
+        const { pathname } = this.props.location
+        const cityName = (pathname.length > 1) ?
+            getCityInfo(pathname.replace(/\//g, '')).name :
+            '臺北市'
 
         return somethingWrong ? <Error />
             : isLoading ? <Loading />
@@ -141,7 +143,7 @@ class App extends React.Component {
                 )}
                 <div className="app-container">
                     <CurrentWeather
-                        location={coordsToName(latitude, longitude)}
+                        location={cityName}
                         summary={summary}
                         temperature={temperature}
                         handleOpenModal={this.handleOpenModal}

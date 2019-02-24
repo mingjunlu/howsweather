@@ -1,7 +1,7 @@
 import React from 'react'
-import StatusIcon from './shared/StatusIcon'
-import IconWrapper from './shared/IconWrapper'
-import { syncTheme } from '../functions/helper'
+import StatusIcon from './StatusIcon'
+import IconWrapper from './IconWrapper'
+import { syncTheme } from '../../functions/helper'
 
 const Loading = () => (
     <div
@@ -9,7 +9,10 @@ const Loading = () => (
         style={{ '--theme-color': syncTheme() }}
     >
         <StatusIcon>
-            <IconWrapper spin icon="circle-notch" />
+            <IconWrapper
+                spin
+                icon="circle-notch"
+            />
         </StatusIcon>
     </div>
 )

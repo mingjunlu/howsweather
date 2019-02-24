@@ -6,7 +6,8 @@ const IconWrapper = ({
     icon=null,
     className=null,
     spin=false,
-    fixedWidth=true
+    fixedWidth=true,
+    iconShadow=false
 }) => (icon && (
     <div
         className={className && `${className}`}
@@ -16,6 +17,11 @@ const IconWrapper = ({
             spin={spin}
             fixedWidth={fixedWidth}
             icon={icon}
+            style={{
+                filter: iconShadow ?
+                    'drop-shadow(4px 4px 3px rgba(60, 60, 60, 0.1))' :
+                    undefined
+            }}
         />
     </div>
 ))
