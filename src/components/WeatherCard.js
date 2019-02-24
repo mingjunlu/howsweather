@@ -19,7 +19,8 @@ const WeatherCard = ({
                 '現在' :
                 new Date(time * 1000)
                     .toLocaleTimeString()
-                    .slice(0, 3) + '時'
+                    .slice(0, 4)
+                    .replace(':', '') + '時'
             }
         </p>
         <p
