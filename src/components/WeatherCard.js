@@ -15,9 +15,9 @@ const WeatherCard = ({
 }) => (
     <div className="weather-card">
         <p className="weather-card__time">
-            {dayjs().isSame(dayjs.unix(time), 'hour') ?
+            {dayjs().isSame(dayjs(time), 'hour') ?
                 '現在' :
-                new Date(time * 1000)
+                new Date(time)
                     .toLocaleTimeString()
                     .slice(0, 4)
                     .replace(':', '') + '時'
@@ -25,11 +25,11 @@ const WeatherCard = ({
         </p>
         <p
             className="weather-card__pop"
-            style={{ visibility: chanceOfRain < 0.05 ?
-                'hidden' : 'visible'
+            style={{ visibility: chanceOfRain > 0 ?
+                'visible' : 'hidden'
             }}
         >
-            {`${Math.round(chanceOfRain * 10) * 10}%`}
+            {`${chanceOfRain}%`}
         </p>
         <IconWrapper
             icon={weatherToIcon(icon)}

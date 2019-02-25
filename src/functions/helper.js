@@ -33,25 +33,25 @@ const withUnits = (obj) => {
                 return {
                     engTag: key,
                     tag: '日出',
-                    text: dayjs.unix(obj[key]).format('A h:mm').replace('AM', '上午')
+                    text: dayjs(obj[key]).format('A h:mm').replace('AM', '上午')
                 }
             case 'sunsetTime':
                 return {
                     engTag: key,
                     tag: '日落',
-                    text: dayjs.unix(obj[key]).format('A h:mm').replace('PM', '上午')
+                    text: dayjs(obj[key]).format('A h:mm').replace('PM', '上午')
                 }
             case 'chanceOfRain':
                 return {
                     engTag: key,
                     tag: '降雨機率',
-                    text: `${Math.round(obj[key] * 10) * 10}%`
+                    text: `${obj[key]}%`
                 }
             case 'humidity':
                 return {
                     engTag: key,
                     tag: '濕度',
-                    text: `${obj[key] * 100}%`
+                    text: `${obj[key]}%`
                 }
             case 'wind':
                 const arr = obj[key].split(',')

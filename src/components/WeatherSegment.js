@@ -17,7 +17,7 @@ const WeatherSegment = ({
 }) => (
     <div className={`weather-segment ${className}`.trim()}>
         <p className="weather-segment__day">
-            <span>{dayjs.unix(time).format('dddd')}</span>
+            <span>{dayjs(time).format('dddd')}</span>
             {note && <span className="weather-segment__date">今天</span>}
         </p>
         {icon && (
