@@ -11,6 +11,7 @@ import CurrentWeather from './CurrentWeather'
 import WeatherSegment from './WeatherSegment'
 import WeatherCard from './WeatherCard'
 import WeatherDetails from './WeatherDetails'
+import Footer from './Footer'
 // Functions
 import { syncTheme, getCityInfo } from '../functions/helper'
 
@@ -140,6 +141,7 @@ class App extends React.Component {
                     </div>
                     <p className="reminder">{reminder}</p>
                     <WeatherDetails data={details} />
+                    <Footer />
                 </div>
             </div>
         )

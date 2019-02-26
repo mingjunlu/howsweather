@@ -1,0 +1,13 @@
+.footer {
+    border-top: 1px solid rgba($white, 0.4);
+    opacity: 0.65;
+    font-size: $s-size;
+    padding: $s-size $m-size 0 $m-size;
+    text-align: center;
+}
+
+@media (min-width: 768px) and (orientation: landscape) {
+    .footer {
+        grid-area: foot;
+    }
+}
