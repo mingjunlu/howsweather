@@ -79,7 +79,7 @@ const withUnits = (obj) => {
                 return {
                     engTag: key,
                     tag: '降雨量',
-                    text: `${obj[key].toFixed(1)} 公分`
+                    text: `${parseFloat(obj[key].toFixed(1))} 公分`
                 }
             case 'pressure':
                 return {
@@ -91,7 +91,7 @@ const withUnits = (obj) => {
                 return {
                     engTag: key,
                     tag: '能見度',
-                    text: `${obj[key].toFixed(1)} 公里`
+                    text: `${parseFloat(obj[key].toFixed(1))} 公里`
                 }
             case 'uvIndex':
                 return {
