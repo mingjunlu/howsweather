@@ -26,7 +26,6 @@ class App extends React.Component {
         icon: '',
         summary: '',
         temperature: undefined,
-        reminder: '',
         hourlyData: [],
         dailyData: [],
         details: {}
@@ -49,7 +48,6 @@ class App extends React.Component {
                 icon: currently.icon,
                 summary: currently.summary,
                 temperature: currently.temperature,
-                reminder: currently.reminder,
                 hourlyData: hourly,
                 dailyData: daily,
                 details
@@ -73,7 +71,6 @@ class App extends React.Component {
             icon,
             summary,
             temperature,
-            reminder,
             hourlyData,
             dailyData,
             details
@@ -139,7 +136,14 @@ class App extends React.Component {
                             />
                         ))}
                     </div>
-                    <p className="reminder">{reminder}</p>
+                    <p className="reminder">
+                        {`${cityName}目前${summary}，氣溫 ` +
+                            `${Math.round(temperature)} 度。預計今日溫度介於 ` +
+                            `${Math.round(dailyData[0].minTemp)} 到 ` +
+                            `${Math.round(dailyData[0].maxTemp)} 度之間，` +
+                            `降雨機率約 ${details.chanceOfRain}%。`
+                        }
+                    </p>
                     <WeatherDetails data={details} />
                     <Footer />
                 </div>
