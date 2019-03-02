@@ -27,6 +27,14 @@ a {
     color: inherit;
 }
 
+.animated.fast {
+    animation-duration: 400ms;
+}
+
+.animated.faster {
+    animation-duration: 200ms;
+}
+
 @media (min-width: 768px) {
     html {
         font-size: 70%;

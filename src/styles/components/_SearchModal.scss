@@ -15,7 +15,7 @@
     display: flex;
     align-items: center;
     font-size: 1.8rem;
-    margin: 0 auto $xs-size auto;
+    margin: 0 auto $tiny-size auto;
     max-width: 480px;
 }
 
@@ -50,11 +50,11 @@
     line-height: 2.4rem;
     height: 2.4rem;
     outline: none;
+    color: darken($gray, 40%);
 }
 
 .search-modal__cancel {
-    color: $milk-white;
-    opacity: 0.8;
+    color: darken($milk-white, 10%);
     flex-shrink: 0;
     background: transparent;
     border: 0;
@@ -74,7 +74,7 @@
 .search-modal__matched {
     display: block;
     color: rgba($milk-white, 0.8);
-    padding: $xs-size;
+    padding: $s-size $xs-size;
     border-bottom: 1px solid rgba($milk-white, 0.3);
     max-width: 480px;
     margin: 0 auto;

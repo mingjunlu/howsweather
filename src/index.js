@@ -20,6 +20,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import AppRouter from './AppRouter'
 import 'normalize.css/normalize.css'
+import 'animate.css/animate.css'
 import './styles/styles.scss'
 
 

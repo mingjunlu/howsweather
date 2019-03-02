@@ -101,7 +101,7 @@ class App extends React.Component {
                         handleCloseModal={this.handleCloseModal}
                     />
                 )}
-                <div className="app-container">
+                <div className="app-container animated fadeIn fast">
                     <CurrentWeather
                         location={cityName}
                         summary={summary}

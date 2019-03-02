@@ -1,7 +1,8 @@
 import React from 'react'
 
 const StatusIcon = (props) => (
-    <div style={{
+    <div
+        style={{
         minHeight: '90vh',
         display: 'flex',
         flexDirection: 'column',
@@ -9,7 +10,9 @@ const StatusIcon = (props) => (
         alignItems: 'center',
         fontSize: '4.0rem',
         color: 'rgb(250, 250, 250)'
-    }}>
+        }}
+        className="animated fadeIn fast"
+    >
         {props.children}
     </div>
 )

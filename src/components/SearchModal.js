@@ -22,7 +22,7 @@ class SearchModal extends React.Component {
         return isOpen && (
             <div
                 tabIndex="0"
-                className="search-modal__overlay"
+                className="search-modal__overlay animated fadeIn fast"
                 onKeyDown={this.handleEscape}
             >
                 <div className="search-modal__container">
@@ -37,7 +37,7 @@ class SearchModal extends React.Component {
                             type="search"
                             placeholder="搜尋"
                             autoComplete="off"
-                            autoFocus={true}
+                            autoFocus
                             value={keyword}
                             onChange={this.handleInput}
                         />
