@@ -1,0 +1,15 @@
+.reminder {
+    text-align: justify;
+    line-height: 1.4;
+    border-top: 1px solid rgba($white, 0.4);
+    padding: $xs-size $m-size;
+    text-shadow: 1px 3px 3px rgba(60, 60, 60, 0.1);
+}
+
+@media (min-width: 768px) and (orientation: landscape) {
+    .reminder {
+        grid-area: rmd;
+        border-top: 0;
+        border-bottom: 1px solid rgba(250, 250, 250, 0.4);
+    }
+}

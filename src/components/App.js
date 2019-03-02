@@ -8,8 +8,9 @@ import Error from './shared/Error'
 import Loading from './shared/Loading'
 import SearchModal from './SearchModal'
 import CurrentWeather from './CurrentWeather'
-import WeatherSegment from './WeatherSegment'
-import WeatherCard from './WeatherCard'
+import HourlyForecast from './HourlyForecast'
+import DailyForecast from './DailyForecast'
+import Reminder from './Reminder'
 import WeatherDetails from './WeatherDetails'
 import Footer from './Footer'
 // Functions
@@ -105,45 +106,19 @@ class App extends React.Component {
                         temperature={temperature}
                         handleOpenModal={this.handleOpenModal}
                     />
-                    <div className="hourly-forecast">
-                        <WeatherSegment
-                            time={dailyData[0].time}
-                            note="今天"
-                            maxTemp={dailyData[0].maxTemp}
-                            minTemp={dailyData[0].minTemp}
-                            className="weather-segment--displaying"
-                        />
-                        <div className="cards-container">
-                            {hourlyData.map(hour => (
-                                <WeatherCard
-                                    key={hour.time}
-                                    time={hour.time}
-                                    chanceOfRain={hour.chanceOfRain}
-                                    icon={hour.icon}
-                                    temperature={hour.temperature}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                    <div className="daily-forecast">
-                        {dailyData.slice(1).map(day => (
-                            <WeatherSegment
-                                key={day.time}
-                                time={day.time}
-                                icon={day.icon}
-                                maxTemp={day.maxTemp}
-                                minTemp={day.minTemp}
-                            />
-                        ))}
-                    </div>
-                    <p className="reminder">
-                        {`${cityName}目前${summary}，氣溫 ` +
-                            `${Math.round(temperature)} 度。預計今日溫度介於 ` +
-                            `${Math.round(dailyData[0].minTemp)} 到 ` +
-                            `${Math.round(dailyData[0].maxTemp)} 度之間，` +
-                            `降雨機率約 ${details.chanceOfRain}%。`
-                        }
-                    </p>
+                    <HourlyForecast
+                        today={dailyData[0]}
+                        hourlyData={hourlyData}
+                    />
+                    <DailyForecast dailyData={dailyData} />
+                    <Reminder
+                        cityName={cityName}
+                        summary={summary}
+                        temperature={temperature}
+                        minTemp={dailyData[0].minTemp}
+                        maxTemp={dailyData[0].maxTemp}
+                        chanceOfRain={details.chanceOfRain}
+                    />
                     <WeatherDetails data={details} />
                     <Footer />
                 </div>

@@ -1,0 +1,11 @@
+.daily-forecast {
+    padding: $xs-size $m-size;
+    border-top: 1px solid rgba($white, 0.4);
+}
+
+@media (min-width: 768px) and (orientation: landscape) {
+    .daily-forecast {
+        grid-area: day;
+        padding-bottom: 0;
+    }
+}
