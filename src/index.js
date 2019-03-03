@@ -16,6 +16,7 @@ import {
     faSmog,
     faSnowflake,
     faSearch,
+    faMapMarkerAlt,
     faCrow
 } from '@fortawesome/free-solid-svg-icons'
 import AppRouter from './AppRouter'
@@ -44,6 +45,7 @@ library.add(
     faSmog,
     faSnowflake,
     faSearch,
+    faMapMarkerAlt,
     faCrow
 )
 

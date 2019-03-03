@@ -21,7 +21,7 @@ dayjs.locale('zh-tw')   // 設定語系
 
 class App extends React.Component {
     state = {
-        isModalOpen: false,
+        isModalOpen: true,
         isLoading: true,
         somethingWrong: false,
         icon: '',
