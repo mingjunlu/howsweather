@@ -2,8 +2,7 @@ import React from 'react'
 import IconWrapper from './shared/IconWrapper'
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-tw'
-import { weatherToIcon } from '../functions/helper.js'
-
+import weatherToIcon from '../utils/weatherToIcon'
 
 dayjs.locale('zh-tw')   // 設定語系
 

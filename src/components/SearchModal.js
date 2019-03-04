@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import IconWrapper from './shared/IconWrapper'
-import { cityList } from '../functions/helper'
-
+import * as locations from '../utils/locations.json'
 
 class SearchModal extends React.Component {
     state = {
@@ -20,9 +19,9 @@ class SearchModal extends React.Component {
         const { keyword } = this.state
         const { isOpen, handleCloseModal } = this.props
         const newKeyword = keyword.trim().replace(/台/g, '臺')
-        const matches = newKeyword ?
-            cityList.filter(city => city.name.includes(newKeyword)) :
-            []
+        const matches = newKeyword
+            ? locations.default.filter(loc => loc.name.includes(newKeyword))
+            : []
         return isOpen && (
             <div
                 tabIndex="0"
@@ -31,12 +30,9 @@ class SearchModal extends React.Component {
             >
                 <div className="search-modal__container">
                     <label className="search-modal__searchbar">
-                        <IconWrapper
-                            icon="search"
-                            className="search-modal__icon"
-                        />
+                        <IconWrapper icon="search" className="search-modal__icon" />
                         <input
-                            id="city-input"
+                            id="location-input"
                             className="search-modal__input"
                             type="search"
                             placeholder="搜尋"
@@ -54,40 +50,39 @@ class SearchModal extends React.Component {
                         取消
                     </button>
                 </div>
-                {newKeyword && matches.map(city => (
+                {newKeyword && matches.map(loc => (
                     <Link
-                        key={city.engName}
-                        to={`/${city.engName}/`}
+                        key={loc.coords}
+                        to={loc.path}
                         className="search-modal__matched"
                     >
                         <IconWrapper
                             icon="map-marker-alt"
-                            className={'search-modal__icon' +
-                                ' search-modal__icon--small'
-                            }
+                            className="search-modal__icon search-modal__icon--small"
                         />
-                        {city.name.split('').map(word => (
-                            <span
-                                key={word}
-                                className={newKeyword.includes(word) ?
-                                    'search-modal__highlighted-word' :
-                                    undefined
-                                }
-                            >
-                                {word === '臺' && keyword.includes('台') ?
-                                    '台' : word
-                                }
-                            </span>
-                        ))}
+                        <div style={{ display: 'inline' }}>
+                            {loc.name.split('').map(word => (
+                                <span
+                                    key={word}
+                                    className={newKeyword.includes(word)
+                                        ? 'search-modal__highlighted-word'
+                                        : undefined
+                                    }
+                                >
+                                    {word === '臺' && keyword.includes('台') ? '台' : word}
+                                </span>
+                            ))}
+                        </div>
+                        <div style={{ marginLeft: '0.8em', display: 'inline' }}>
+                            {loc.address}
+                        </div>
                     </Link>
                 ))}
                 {newKeyword && matches.length < 1 && (
                     <div className="search-modal__matched">
                         <IconWrapper
                             icon="map-marker-alt"
-                            className={'search-modal__icon' +
-                                ' search-modal__icon--small'
-                            }
+                            className="search-modal__icon search-modal__icon--small"
                             style={{ visibility: 'hidden' }}
                         />
                         <span>查無結果</span>

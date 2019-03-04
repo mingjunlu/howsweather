@@ -12,21 +12,13 @@ class CurrentWeather extends React.Component {
         return (
             <div className="current">
                 <div className="current__location">
-                    <div
-                        className="current__city-wrapper"
-                        onClick={handleOpenModal}
-                    >
+                    <div className="current__location-wrapper" onClick={handleOpenModal}>
                         <span>{location}</span>
-                        <IconWrapper
-                            icon="search"
-                            className="city-wrapper__icon"
-                        />
+                        <IconWrapper icon="search" className="location-wrapper__icon" />
                     </div>
                 </div>
                 <p className="current__summary">{summary}</p>
-                <p className="current__temperature">
-                    {Math.round(temperature)}
-                </p>
+                <p className="current__temperature">{Math.round(temperature)}</p>
             </div>
         )
     }

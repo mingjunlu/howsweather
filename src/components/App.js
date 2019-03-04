@@ -1,8 +1,6 @@
 // Libraries
 import React from 'react'
 import axios from 'axios'
-import dayjs from 'dayjs'
-import 'dayjs/locale/zh-tw'
 // Components
 import Error from './shared/Error'
 import Loading from './shared/Loading'
@@ -13,15 +11,13 @@ import DailyForecast from './DailyForecast'
 import Reminder from './Reminder'
 import WeatherDetails from './WeatherDetails'
 import Footer from './Footer'
-// Functions
-import { syncTheme, getCityInfo } from '../functions/helper'
-
-
-dayjs.locale('zh-tw')   // 設定語系
+// Utilities
+import syncTheme from '../utils/syncTheme'
+import * as locations from '../utils/locations.json'
 
 class App extends React.Component {
     state = {
-        isModalOpen: true,
+        isModalOpen: false,
         isLoading: true,
         somethingWrong: false,
         icon: '',
@@ -33,9 +29,11 @@ class App extends React.Component {
     }
     async componentDidMount() {
         const { pathname } = this.props.location
-        const coordinates = (pathname.length > 1) ?
-            getCityInfo(pathname.replace(/\//g, '')).coords :
-            '25.038062,121.564448'  // 臺北市座標
+        const location = locations.default
+            .find(loc => loc.path.replace(/\//g, '') === pathname.replace(/\//g, ''))
+        const coordinates = (pathname.length > 1 && location)
+            ? location.coords
+            : '25.038062,121.564448'  // 臺北市座標
         const url = `/.netlify/functions/weather?loc=${coordinates}`
 
         try {
@@ -55,7 +53,7 @@ class App extends React.Component {
             })
         } catch(err) {
             console.log(err)
-            this.setState({isLoading: false, somethingWrong: true})
+            this.setState({ isLoading: false, somethingWrong: true })
         }
     }
     handleOpenModal = () => {
@@ -76,54 +74,53 @@ class App extends React.Component {
             dailyData,
             details
         } = this.state
-
         const { pathname } = this.props.location
-        const cityName = (pathname.length > 1) ?
-            getCityInfo(pathname.replace(/\//g, '')).name :
-            '臺北市'
+        const location = pathname === '/'
+            ? { name: '臺北市' }
+            : locations.default
+                .find(loc => loc.path.replace(/\//g, '') === pathname.replace(/\//g, ''))
 
-        return somethingWrong ? <Error />
-            : isLoading ? <Loading />
-            : (
-            <div
-                className="background-overlay"
-                style={{
-                    '--theme-color': syncTheme(icon),
-                    height: isModalOpen && '100vh',
-                    overflow: isModalOpen && 'auto'
-                }}
-            >
-                {isModalOpen && (
-                    <SearchModal
-                        isOpen={isModalOpen}
-                        handleCloseModal={this.handleCloseModal}
-                    />
-                )}
-                <div className="app-container animated fadeIn fast">
-                    <CurrentWeather
-                        location={cityName}
-                        summary={summary}
-                        temperature={temperature}
-                        handleOpenModal={this.handleOpenModal}
-                    />
-                    <HourlyForecast
-                        today={dailyData[0]}
-                        hourlyData={hourlyData}
-                    />
-                    <DailyForecast dailyData={dailyData} />
-                    <Reminder
-                        cityName={cityName}
-                        summary={summary}
-                        temperature={temperature}
-                        minTemp={dailyData[0].minTemp}
-                        maxTemp={dailyData[0].maxTemp}
-                        chanceOfRain={details.chanceOfRain}
-                    />
-                    <WeatherDetails data={details} />
-                    <Footer />
+        if (somethingWrong) return <Error />
+        else if (isLoading) return <Loading />
+        else {
+            return (
+                <div
+                    className="background-overlay"
+                    style={{
+                        '--theme-color': syncTheme(icon),
+                        height: isModalOpen && '100vh',
+                        overflow: isModalOpen && 'auto'
+                    }}
+                >
+                    {isModalOpen && (
+                        <SearchModal
+                            isOpen={isModalOpen}
+                            handleCloseModal={this.handleCloseModal}
+                        />
+                    )}
+                    <div className="app-container animated fadeIn fast">
+                        <CurrentWeather
+                            location={location.name}
+                            summary={summary}
+                            temperature={temperature}
+                            handleOpenModal={this.handleOpenModal}
+                        />
+                        <HourlyForecast today={dailyData[0]} hourlyData={hourlyData} />
+                        <DailyForecast dailyData={dailyData} />
+                        <Reminder
+                            location={location.name}
+                            summary={summary}
+                            temperature={temperature}
+                            minTemp={dailyData[0].minTemp}
+                            maxTemp={dailyData[0].maxTemp}
+                            chanceOfRain={details.chanceOfRain}
+                        />
+                        <WeatherDetails data={details} />
+                        <Footer />
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        }
     }
 }
 

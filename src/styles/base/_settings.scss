@@ -5,13 +5,13 @@ $gray: rgb(124, 133, 134);
 $blue: rgb(85, 165, 200);
 $gray-gradient: linear-gradient(
     170deg,
-    rgba(124, 133, 134, 1) 0%,
-    rgba(81, 101, 117, 1) 45%
+    rgb(124, 133, 134) 0%,
+    rgb(81, 101, 117) 45%
 );
 $blue-gradient: linear-gradient(
-    345deg,
-    rgba(85, 165, 200, 1) 0%,
-    rgba(35, 130, 190, 1) 40%
+    170deg,
+    rgb(85, 165, 200) 0%,
+    rgb(69, 140, 184) 45%
 );
 
 // spacing

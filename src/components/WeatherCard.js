@@ -1,11 +1,7 @@
 import React from 'react'
 import IconWrapper from './shared/IconWrapper'
 import dayjs from 'dayjs'
-import 'dayjs/locale/zh-tw'
-import { weatherToIcon } from '../functions/helper.js'
-
-
-dayjs.locale('zh-tw')   // 設定語系
+import weatherToIcon from '../utils/weatherToIcon'
 
 const WeatherCard = ({
     time=null,
@@ -15,9 +11,9 @@ const WeatherCard = ({
 }) => (
     <div className="weather-card">
         <p className="weather-card__time">
-            {dayjs().isSame(dayjs(time), 'hour') ?
-                '現在' :
-                new Date(time)
+            {dayjs().isSame(dayjs(time), 'hour')
+                ? '現在'
+                : new Date(time)
                     .toLocaleTimeString()
                     .slice(0, 4)
                     .replace(':', '') + '時'
@@ -25,9 +21,7 @@ const WeatherCard = ({
         </p>
         <p
             className="weather-card__pop"
-            style={{ visibility: chanceOfRain > 0 ?
-                'visible' : 'hidden'
-            }}
+            style={{ visibility: chanceOfRain > 0 ? 'visible' : 'hidden' }}
         >
             {`${chanceOfRain}%`}
         </p>

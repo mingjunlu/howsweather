@@ -1,5 +1,5 @@
 import React from 'react'
-import { withUnits } from '../functions/helper'
+import withUnits from '../utils/withUnits'
 
 const WeatherDetails = ({ data }) =>  (
     <div className="details">

@@ -18,9 +18,9 @@ const IconWrapper = ({
             fixedWidth={fixedWidth}
             icon={icon}
             style={{
-                filter: iconShadow ?
-                    'drop-shadow(4px 4px 3px rgba(60, 60, 60, 0.1))' :
-                    undefined
+                filter: iconShadow
+                    ? 'drop-shadow(4px 4px 3px rgba(60, 60, 60, 0.1))'
+                    : undefined
             }}
         />
     </div>
