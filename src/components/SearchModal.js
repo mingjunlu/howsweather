@@ -81,7 +81,7 @@ class SearchModal extends React.Component {
                 {newKeyword && matches.length < 1 && (
                     <div
                         className="search-modal__matched"
-                        style={{ animation: '1s suddenlyAppear', animationFillMode: 'forwards' }}
+                        style={{ animation: '1s suddenlyShow', animationFillMode: 'forwards' }}
                     >
                         <IconWrapper
                             icon="map-marker-alt"
