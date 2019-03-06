@@ -63,7 +63,7 @@ class SearchModal extends React.Component {
                         <div style={{ display: 'inline' }}>
                             {loc.name.split('').map(word => (
                                 <span
-                                    key={word}
+                                    key={`${word}-${loc.name}-${Math.random()}`}
                                     className={newKeyword.includes(word)
                                         ? 'search-modal__highlighted-word'
                                         : undefined

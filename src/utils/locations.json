@@ -33,13 +33,7 @@
         "name": "新竹縣",
         "engName": "hsinchu-county",
         "path": "/hsinchu-county/",
-        "coords": "24.8鄉26932,121.012900"
-    },
-    {
-        "name": "苗栗縣鄉",
-        "engName": "miaoli",
-        "path": "/miaoli/",
-        "coords": "24.564909,120.820741"
+        "coords": "24.826932,121.012900"
     },
     {
         "name": "臺中市",
@@ -1294,13 +1288,6 @@
         "coords": "25.111551,121.686196"
     },
     {
-        "name": "七堵區",
-        "engName": "qidu",
-        "path": "/keelung/qidu/",
-        "address": "基隆市七堵區",
-        "coords": "25.111551,121.686196"
-    },
-    {
         "name": "東區",
         "engName": "east",
         "path": "/hsinchu/east/",
@@ -1557,7 +1544,7 @@
         "engName": "changhua",
         "path": "/changhua/changhua/",
         "address": "彰化縣彰化市",
-        "coords": "24.081331，120.561335"
+        "coords": "24.081331,120.561335"
     },
     {
         "name": "員林市",
