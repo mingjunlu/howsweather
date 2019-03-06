@@ -1,16 +1,9 @@
 .search-modal__overlay {
-    position: fixed;
     min-height: 100vh;
-    overflow-y: auto;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: $gray;
-    background: $gray-gradient;
-    z-index: 1;
     padding: 1.6rem;
-    -webkit-overflow-scrolling: touch;  // 解決 iOS Safari 滑動卡頓問題
+    margin: 0 auto;
+    outline: none;
+    width: 100%;
 }
 
 .search-modal__container {
@@ -92,11 +85,24 @@
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) and (orientation: portrait) {
+    .search-modal__overlay,
+    .search-modal__container {
+        max-width: 640px;
+    }
+    .search-modal__matched {
+        max-width: unset;
+        margin: unset;
+    }
+}
+
+@media (min-width: 768px) and (orientation: landscape) {
+    .search-modal__overlay,
     .search-modal__container {
         max-width: 768px;
     }
     .search-modal__matched {
-        max-width: 768px;
+        max-width: unset;
+        margin: unset;
     }
 }

@@ -86,11 +86,7 @@ class App extends React.Component {
             return (
                 <div
                     className="background-overlay"
-                    style={{
-                        '--theme-color': syncTheme(icon),
-                        height: isModalOpen && '100vh',
-                        overflow: isModalOpen && 'auto'
-                    }}
+                    style={{ '--theme-color': isModalOpen ? 'rgb(81, 101, 117)' : syncTheme(icon) }}
                 >
                     {isModalOpen && (
                         <SearchModal
@@ -98,7 +94,10 @@ class App extends React.Component {
                             handleCloseModal={this.handleCloseModal}
                         />
                     )}
-                    <div className="app-container animated fadeIn fast">
+                    <div
+                        className="app-container animated fadeIn fast"
+                        style={{ display: isModalOpen && 'none' }}
+                    >
                         <CurrentWeather
                             location={location.name}
                             summary={summary}
