@@ -72,6 +72,18 @@
     border-bottom: 1px solid rgba($milk-white, 0.3);
     max-width: 480px;
     margin: 0 auto;
+    visibility: hidden;
+    animation: 350ms suddenlyShow;
+    animation-fill-mode: forwards;
+}
+
+@keyframes suddenlyShow {
+    99% {
+        visibility: hidden;
+    }
+    100% {
+        visibility: visible;
+    }
 }
 
 .search-modal__highlighted-word {
