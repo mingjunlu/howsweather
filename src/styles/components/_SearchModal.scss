@@ -1,6 +1,7 @@
 .search-modal__overlay {
     position: fixed;
-    height: 100vh;
+    min-height: 100vh;
+    overflow-y: auto;
     top: 0;
     right: 0;
     bottom: 0;
@@ -9,6 +10,7 @@
     background: $gray-gradient;
     z-index: 1;
     padding: 1.6rem;
+    -webkit-overflow-scrolling: touch;  // 解決 iOS Safari 滑動卡頓問題
 }
 
 .search-modal__container {
