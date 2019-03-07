@@ -1,12 +1,12 @@
 const searchLocation = (keyword, locations) => {
     return (!keyword || !locations)
-        ? undefined
+        ? []
         : locations
             .filter(loc => loc.name.includes(keyword))
             .sort((a, b) => {
                 // 完全符合的最優先顯示
-                if (a === 'loc.name') return -1
-                if (b === 'loc.name') return 1
+                if (a === keyword) return -1
+                if (b === keyword) return 1
 
                 const arr = [a, b]
                 const scores = [0, 0]
