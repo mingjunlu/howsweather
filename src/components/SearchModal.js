@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import IconWrapper from './shared/IconWrapper'
+import searchLocation from '../utils/searchLocation'
 import * as locations from '../utils/locations.json'
 
 class SearchModal extends React.Component {
@@ -19,9 +20,7 @@ class SearchModal extends React.Component {
         const { keyword } = this.state
         const { isOpen, handleCloseModal } = this.props
         const newKeyword = keyword.trim().replace(/台/g, '臺')
-        const matches = newKeyword
-            ? locations.default.filter(loc => loc.name.includes(newKeyword))
-            : []
+        const matches = searchLocation(newKeyword, locations.default)
         return isOpen && (
             <div
                 tabIndex="0"
