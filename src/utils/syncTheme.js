@@ -1,6 +1,6 @@
 const syncTheme = (description) => {
-    const lightTheme = 'linear-gradient(170deg, rgb(85, 165, 200) 0%, rgb(69, 140, 184) 45%'
-    const darkTheme = 'linear-gradient(170deg, rgb(124, 133, 134) 0%, rgb(81, 101, 117) 45%'
+    const lightTheme = 'linear-gradient(180deg, rgb(115, 165, 197) 0%, rgb(58, 132, 182) 35%)'
+    const darkTheme = 'linear-gradient(180deg, rgb(124, 133, 134) 0%, rgb(81, 101, 117) 35%)'
     if (!description) {return lightTheme}
 
     switch(description) {
