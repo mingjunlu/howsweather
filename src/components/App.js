@@ -53,6 +53,7 @@ class App extends React.Component {
     }
     handleCloseModal = () => {
         this.setState({ isModalOpen: false })
+        window.scroll(0, 0) // 回到頁面頂端
     }
     render() {
         const {
