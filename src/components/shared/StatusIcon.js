@@ -3,7 +3,7 @@ import React from 'react'
 const StatusIcon = (props) => (
     <div
         style={{
-            minHeight: '90vh',
+            minHeight: '100vh',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
