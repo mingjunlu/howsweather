@@ -27,9 +27,7 @@ const WeatherSegment = ({
         )}
         <p className="weather-segment__temp">
             <span>{Math.round(maxTemp)}</span>
-            <span className="weather-segment__min-temp">
-                {Math.round(minTemp)}
-            </span>
+            <span className="weather-segment__min-temp">{Math.round(minTemp)}</span>
         </p>
     </div>
 )

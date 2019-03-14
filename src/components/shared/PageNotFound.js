@@ -6,11 +6,11 @@ import syncTheme from '../../utils/syncTheme'
 const PageNotFound = () => (
     <div
         className="background-overlay"
-        style={{ '--theme-color': syncTheme(), overflowY: 'hidden' }}
+        style={{ '--theme-color': syncTheme() }}
     >
         <StatusIcon>
             <IconWrapper icon="crow" iconShadow />
-            <p style={{ fontSize: '0.5em', lineHeight: 2 }}>是喜歡探險的朋友呢</p>
+            <p className="background-overlay__error-messsage">是喜歡探險的朋友呢</p>
         </StatusIcon>
     </div>
 )

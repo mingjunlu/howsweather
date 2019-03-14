@@ -6,11 +6,11 @@ import syncTheme from '../../utils/syncTheme'
 const Error = ({ message='' }) => (
     <div
         className="background-overlay"
-        style={{ '--theme-color': syncTheme(), overflowY: 'hidden' }}
+        style={{ '--theme-color': syncTheme() }}
     >
         <StatusIcon>
             <IconWrapper icon="exclamation-triangle" iconShadow />
-            <p style={{ fontSize: '0.5em', lineHeight: 2, fontFamily: 'Arial' }}>
+            <p className="background-overlay__error-messsage">
                 {message || '無法下載資料'}
             </p>
         </StatusIcon>

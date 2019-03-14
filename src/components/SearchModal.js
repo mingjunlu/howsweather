@@ -18,9 +18,7 @@ class SearchModal extends React.Component {
         coords: ''
     }
     handleEscape = (event) => {
-        if (!event.target.id && event.key === 'Escape') {
-            this.props.handleCloseModal()
-        }
+        if (!event.target.id && event.key === 'Escape') { this.props.handleCloseModal() }
     }
     handleInput = (event) => {
         this.setState({ keyword: event.target.value })
@@ -71,7 +69,7 @@ class SearchModal extends React.Component {
                                 className="search-modal__button"
                                 onClick={handleCloseModal}
                             >
-                                <IconWrapper icon="angle-left" style={{ fontSize: '2.0rem' }} />
+                                <IconWrapper icon="angle-left" />
                             </button>
                             <label className="search-modal__searchbar">
                                 <input
@@ -90,20 +88,17 @@ class SearchModal extends React.Component {
                                 className="search-modal__button search-modal__button--highlighted"
                                 onClick={this.handleGetPosition}
                             >
-                                <IconWrapper icon="location-arrow" style={{ fontSize: '1.4rem' }} />
+                                <IconWrapper icon="location-arrow" />
                             </button>
                         </div>
                         {newKeyword && matches.map(loc => (
                             <Link
                                 key={loc.coords}
-                                to={{
-                                    pathname: loc.path,
-                                    state: { coords: loc.coords }
-                                }}
+                                to={{ pathname: loc.path, state: { coords: loc.coords } }}
                                 className="search-modal__matched"
                             >
                                 <IconWrapper icon="map-marker-alt" className="matched__icon" />
-                                <div style={{ display: 'inline' }}>
+                                <div className="matched__text">
                                     {loc.name.split('').map(word => (
                                         <span
                                             key={`${word}-${loc.name}-${Math.random()}`}
@@ -116,18 +111,12 @@ class SearchModal extends React.Component {
                                         </span>
                                     ))}
                                 </div>
-                                <div style={{ marginLeft: '0.8em', display: 'inline' }}>
-                                    {loc.address}
-                                </div>
+                                <div className="matched__note">{loc.address}</div>
                             </Link>
                         ))}
                         {newKeyword && matches.length < 1 && (
                             <div className="search-modal__matched search-modal__matched--delayed">
-                                <IconWrapper
-                                    icon="map-marker-alt"
-                                    className="matched__icon"
-                                    style={{ visibility: 'hidden' }}
-                                />
+                                <IconWrapper icon="question-circle" className="matched__icon" />
                                 <span>查無結果</span>
                             </div>
                         )}

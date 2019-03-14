@@ -1,6 +1,7 @@
 .background-overlay {
     min-height: 100vh;
     --theme-color: $blue-gradient;
+    overflow-y: hidden;
 }
 
 .background-overlay::before {
@@ -13,6 +14,21 @@
     bottom: 0;
     left: 0;
     z-index: -1;
+}
+
+.background-overlay__error-messsage {
+    font-size: 2.0rem;
+    line-height: 2;
+}
+
+.status-icon__container {
+    min-height: 100vh;
+    font-size: 4.0rem;
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .app-container {

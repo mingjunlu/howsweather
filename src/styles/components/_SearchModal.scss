@@ -55,6 +55,7 @@
     background-color: transparent;
     outline: none;
     padding: $s-size $m-size;
+    font-size: 2.0rem;
     color: $gray;
 }
 
@@ -64,6 +65,7 @@
 }
 
 .search-modal__button--highlighted {
+    font-size: 1.4rem;
     color: rgb(97, 149, 245);
 }
 
@@ -96,6 +98,15 @@
 .search-modal__matched--delayed {
     animation: 1s suddenlyShow;
     animation-fill-mode: forwards;
+}
+
+.matched__text {
+    display: inline;
+}
+
+.matched__note {
+    display: inline;
+    margin-left: $xs-size;
 }
 
 .matched__icon {

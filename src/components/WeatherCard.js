@@ -13,10 +13,7 @@ const WeatherCard = ({
         <p className="weather-card__time">
             {dayjs().isSame(dayjs(time), 'hour')
                 ? '現在'
-                : new Date(time)
-                    .toLocaleTimeString()
-                    .slice(0, 4)
-                    .replace(':', '') + '時'
+                : new Date(time).toLocaleTimeString().slice(0, 4).replace(':', '') + '時'
             }
         </p>
         <p
@@ -25,13 +22,8 @@ const WeatherCard = ({
         >
             {`${chanceOfRain}%`}
         </p>
-        <IconWrapper
-            icon={weatherToIcon(icon)}
-            className="weather-card__icon"
-        />
-        <p className="weather-card__temp">
-            {`${Math.round(temperature)}°`}
-        </p>
+        <IconWrapper icon={weatherToIcon(icon)} className="weather-card__icon" />
+        <p className="weather-card__temp">{`${Math.round(temperature)}°`}</p>
     </div>
 )
 
