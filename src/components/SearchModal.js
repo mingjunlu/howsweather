@@ -1,9 +1,11 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
+import axios from 'axios'
 import IconWrapper from './shared/IconWrapper'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Error from './shared/Error'
+import getPosition from '../utils/getPosition'
 import searchLocation from '../utils/searchLocation'
 import * as locations from '../utils/locations.json'
 
@@ -23,18 +25,25 @@ class SearchModal extends React.Component {
     handleInput = (event) => {
         this.setState({ keyword: event.target.value })
     }
-    handleGetLocation = () => {
+    handleGetPosition = async () => {
         this.setState({ isLocating: true })
-        navigator.geolocation.getCurrentPosition(({ coords: {latitude, longitude} }) => {
-            this.setState({
-                isRedirecting: true,
-                isLocating: false,
-                coords: `${latitude},${longitude}`
-            })
-        }, (err) => {
-            console.log(err)
-            this.setState({ failedToLocate: true, isLocating: false })
-        })
+        // 先用 Geolocation API 定位
+        try {
+            const coords = await getPosition({ enableHighAccuracy: true })
+            this.setState({ isRedirecting: true, isLocating: false, coords })
+        } catch(err) {
+            console.log(err.message)
+            // 失敗的話再用 IP 推估約略位置
+            try {
+                const resp = await axios.get('https://ipapi.co/json/')
+                const { data: { latitude, longitude } } = resp
+                const coordinates = `${latitude},${longitude}`
+                this.setState({ isRedirecting: true, isLocating: false, coords: coordinates })
+            } catch(error) {
+                console.log(error)
+                this.setState({ failedToLocate: true, isLocating: false })
+            }
+        }
     }
     render() {
         const { isRedirecting, failedToLocate, isLocating, keyword, coords } = this.state
@@ -79,7 +88,7 @@ class SearchModal extends React.Component {
                             <button
                                 type="button"
                                 className="search-modal__button search-modal__button--highlighted"
-                                onClick={this.handleGetLocation}
+                                onClick={this.handleGetPosition}
                             >
                                 <IconWrapper icon="location-arrow" style={{ fontSize: '1.4rem' }} />
                             </button>
