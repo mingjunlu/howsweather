@@ -21,10 +21,10 @@ const WeatherSegment = ({
         </p>
         {icon && (
             <IconWrapper
-                icon={weatherToIcon(icon)}
+                icon={weatherToIcon(icon).replace('moon', 'sun')}
                 className="weather-segment__icon"
-            />)
-        }
+            />
+        )}
         <p className="weather-segment__temp">
             <span>{Math.round(maxTemp)}</span>
             <span className="weather-segment__min-temp">

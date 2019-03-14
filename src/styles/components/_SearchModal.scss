@@ -1,120 +1,124 @@
+@keyframes compass {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes suddenlyShow {
+    99% { visibility: hidden; }
+    100% { visibility: visible; }
+}
+
+.search-modal__top-overlay {
+    color: $white;
+    background-color: rgba(60, 60, 60, 0.3);
+    font-size: $l-size;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-overlay__icon {
+    position: relative;
+    font-size: 4.0rem;
+    animation: compass 2.2s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite alternate;
+}
+
 .search-modal__overlay {
+    width: 100vw;
     min-height: 100vh;
-    padding: 1.6rem;
+    padding: $s-size 1.0rem;
     margin: 0 auto;
     outline: none;
-    width: 100%;
 }
 
 .search-modal__container {
     display: flex;
     align-items: center;
-    font-size: 1.8rem;
-    margin: 0 auto $tiny-size auto;
-    max-width: 480px;
+    background-color: lighten($milk-white, 5%);
+    border-radius: 0.6rem;
+    position: sticky;
+    top: $s-size;
+    box-shadow: 2px 3px 4px rgba(60, 60, 60, 0.3);
+    margin-bottom: $m-size;
 }
 
 .search-modal__searchbar {
-    background: $milk-white;
-    padding: 0 0.8rem;
-    border-radius: 1.2rem;
     flex-grow: 1;
-    display: inline-flex;
-    align-items: baseline;
-    height: 3.2rem;
-    line-height: 3.2rem;
 }
 
-.search-modal__icon {
+.search-modal__button {
+    border-radius: inherit;
+    border: 0;
+    background-color: transparent;
+    outline: none;
+    padding: $s-size $m-size;
     color: $gray;
-    font-size: 1.6rem;
 }
 
-.search-modal__icon--small {
-    color: lighten($gray, 15%);
-    font-size: 1.4rem;
-    margin-right: 0.4rem;
+.search-modal__button:hover {
+    color: darken($gray, 15%);
+    cursor: pointer;
+}
+
+.search-modal__button--highlighted {
+    color: rgb(97, 149, 245);
+}
+
+.search-modal__button--highlighted:hover {
+    color: darken(rgb(97, 149, 245), 10%);
 }
 
 .search-modal__input {
     border: 0;
     background: transparent;
-    flex-grow: 1;
-    padding: '0 0.4rem';
-    line-height: 2.4rem;
-    height: 2.4rem;
+    padding: 0;
+    height: 2.8rem;
+    line-height: 2.8rem;
     outline: none;
     color: darken($gray, 40%);
-}
-
-.search-modal__cancel {
-    color: darken($milk-white, 10%);
-    flex-shrink: 0;
-    background: transparent;
-    border: 0;
-    padding: 0;
-    outline: none;
-    margin-left: 0.8rem;
-}
-
-.search-modal__cancel:hover {
-    cursor: pointer;
-}
-
-.search-modal__cancel:active {
-    transform: translateY(2px);
+    width: 100%;
+    font-size: 2.0rem;
 }
 
 .search-modal__matched {
-    display: block;
+    display: flex;
+    align-items: center;
     color: darken($milk-white, 10%);
-    padding: $s-size $xs-size;
-    border-bottom: 1px solid rgba($milk-white, 0.3);
-    max-width: 480px;
-    margin: 0 auto;
+    margin: 0 auto $xs-size auto;
     visibility: hidden;
     animation: 350ms suddenlyShow;
     animation-fill-mode: forwards;
 }
 
-@keyframes suddenlyShow {
-    99% {
-        visibility: hidden;
-    }
-    100% {
-        visibility: visible;
-    }
+.search-modal__matched--delayed {
+    animation: 1s suddenlyShow;
+    animation-fill-mode: forwards;
 }
 
-.search-modal__highlighted-word {
+.matched__icon {
+    color: lighten($gray, 15%);
+    font-size: $s-size;
+    padding: $s-size 2.15rem;
+}
+
+.matched__highlighted-word {
     color: white;
     font-weight: bold;
 }
 
 @media (min-width: 480px) {
     .search-modal__overlay {
+        max-width: 480px;
         padding: 3.2rem 1.6rem;
     }
 }
 
-@media (min-width: 768px) and (orientation: portrait) {
-    .search-modal__overlay,
-    .search-modal__container {
+@media (min-width: 768px) {
+    .search-modal__overlay {
         max-width: 640px;
-    }
-    .search-modal__matched {
-        max-width: unset;
-        margin: unset;
-    }
-}
-
-@media (min-width: 768px) and (orientation: landscape) {
-    .search-modal__overlay,
-    .search-modal__container {
-        max-width: 768px;
-    }
-    .search-modal__matched {
-        max-width: unset;
-        margin: unset;
     }
 }

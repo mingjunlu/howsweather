@@ -4,11 +4,7 @@
 }
 
 .details__segment {
-    padding: $xs-size 0 ;
-}
-
-.details__segment:not(:first-of-type) {
-    border-top: 1px solid rgba($white, 0.4);
+    padding: $xs-size 0;
 }
 
 .details__tag {
@@ -30,5 +26,9 @@
         grid-area: dtl;
         align-self: center;
         border-top: 0;
+    }
+    .details__segment {
+        padding: 0;
+        margin-bottom: 1.7rem;
     }
 }

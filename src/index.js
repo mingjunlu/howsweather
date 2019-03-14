@@ -3,21 +3,25 @@ import ReactDOM from 'react-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import WebFont from 'webfontloader'
 import {
+    faAngleLeft,
     faCircleNotch,
-    faExclamationTriangle,
-    faQuestionCircle,
-    faSun,
-    faMoon,
     faCloud,
     faCloudSun,
     faCloudMoon,
     faCloudShowersHeavy,
-    faWind,
+    faCompass,
+    faCrow,
+    faExclamationTriangle,
+    faLocationArrow,
+    faMapMarkerAlt,
+    faMoon,
+    faQuestionCircle,
+    faSearch,
     faSmog,
     faSnowflake,
-    faSearch,
-    faMapMarkerAlt,
-    faCrow
+    faSun,
+    faTimes,
+    faWind
 } from '@fortawesome/free-solid-svg-icons'
 import AppRouter from './AppRouter'
 import 'normalize.css/normalize.css'
@@ -32,21 +36,25 @@ WebFont.load({
 })
 
 library.add(
+    faAngleLeft,
     faCircleNotch,
-    faExclamationTriangle,
-    faQuestionCircle,
-    faSun,
-    faMoon,
     faCloud,
     faCloudSun,
     faCloudMoon,
     faCloudShowersHeavy,
-    faWind,
+    faCompass,
+    faCrow,
+    faExclamationTriangle,
+    faLocationArrow,
+    faMapMarkerAlt,
+    faMoon,
+    faQuestionCircle,
+    faSearch,
     faSmog,
     faSnowflake,
-    faSearch,
-    faMapMarkerAlt,
-    faCrow
+    faSun,
+    faTimes,
+    faWind
 )
 
 ReactDOM.render(<AppRouter />, document.getElementById('root'))

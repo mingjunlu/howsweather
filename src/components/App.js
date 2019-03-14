@@ -13,7 +13,6 @@ import WeatherDetails from './WeatherDetails'
 import Footer from './Footer'
 // Utilities
 import syncTheme from '../utils/syncTheme'
-import * as locations from '../utils/locations.json'
 
 class App extends React.Component {
     state = {
@@ -28,19 +27,12 @@ class App extends React.Component {
         details: {}
     }
     async componentDidMount() {
-        const { pathname } = this.props.location
-        const location = locations.default
-            .find(loc => loc.path.replace(/\//g, '') === pathname.replace(/\//g, ''))
-        const coordinates = (pathname.length > 1 && location)
-            ? location.coords
-            : '25.038062,121.564448'  // 臺北市座標
+        const { geolocation } = this.props
+        const coordinates = geolocation.coords || '25.038062,121.564448' // 預設臺北市
         const url = `/.netlify/functions/weather?loc=${coordinates}`
-
         try {
             const resp = await axios.get(url)
             const { currently, hourly, daily, details } = resp.data
-
-            // 更新狀態
             this.setState({
                 isLoading: false,
                 somethingWrong: false,
@@ -74,11 +66,7 @@ class App extends React.Component {
             dailyData,
             details
         } = this.state
-        const { pathname } = this.props.location
-        const location = pathname === '/'
-            ? { name: '臺北市' }
-            : locations.default
-                .find(loc => loc.path.replace(/\//g, '') === pathname.replace(/\//g, ''))
+        const { geolocation } = this.props
 
         if (somethingWrong) return <Error />
         else if (isLoading) return <Loading />
@@ -88,35 +76,33 @@ class App extends React.Component {
                     className="background-overlay"
                     style={{ '--theme-color': isModalOpen ? 'rgb(81, 101, 117)' : syncTheme(icon) }}
                 >
-                    {isModalOpen && (
+                    {isModalOpen ? (
                         <SearchModal
                             isOpen={isModalOpen}
                             handleCloseModal={this.handleCloseModal}
                         />
+                    ) : (
+                        <div className="app-container animated fadeIn fast">
+                            <CurrentWeather
+                                location={geolocation.name}
+                                summary={summary}
+                                temperature={temperature}
+                                handleOpenModal={this.handleOpenModal}
+                            />
+                            <HourlyForecast today={dailyData[0]} hourlyData={hourlyData} />
+                            <DailyForecast dailyData={dailyData} />
+                            <Reminder
+                                location={geolocation.name}
+                                summary={summary}
+                                temperature={temperature}
+                                minTemp={dailyData[0].minTemp}
+                                maxTemp={dailyData[0].maxTemp}
+                                chanceOfRain={details.chanceOfRain}
+                            />
+                            <WeatherDetails data={details} />
+                            <Footer />
+                        </div>
                     )}
-                    <div
-                        className="app-container animated fadeIn fast"
-                        style={{ display: isModalOpen && 'none' }}
-                    >
-                        <CurrentWeather
-                            location={location.name}
-                            summary={summary}
-                            temperature={temperature}
-                            handleOpenModal={this.handleOpenModal}
-                        />
-                        <HourlyForecast today={dailyData[0]} hourlyData={hourlyData} />
-                        <DailyForecast dailyData={dailyData} />
-                        <Reminder
-                            location={location.name}
-                            summary={summary}
-                            temperature={temperature}
-                            minTemp={dailyData[0].minTemp}
-                            maxTemp={dailyData[0].maxTemp}
-                            chanceOfRain={details.chanceOfRain}
-                        />
-                        <WeatherDetails data={details} />
-                        <Footer />
-                    </div>
                 </div>
             )
         }

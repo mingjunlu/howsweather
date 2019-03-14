@@ -13,7 +13,7 @@ const withUnits = (obj) => {
                 return {
                     engTag: key,
                     tag: '日落',
-                    text: dayjs(obj[key]).format('A h:mm').replace('PM', '上午')
+                    text: dayjs(obj[key]).format('A h:mm').replace('PM', '下午')
                 }
             case 'chanceOfRain':
                 return {
