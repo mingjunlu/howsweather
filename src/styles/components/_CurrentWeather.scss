@@ -12,7 +12,7 @@
 .current__location-wrapper {
     display: inline-flex;
     align-items: center;
-    margin-left: 1.8rem;
+    margin-left: $m-plus;
 }
 
 .current__location-wrapper:hover {
@@ -20,7 +20,7 @@
 }
 
 .location-wrapper__icon {
-    font-size: 1.2rem;
+    font-size: $s-size;
     margin-left: $tiny-size;
 }
 

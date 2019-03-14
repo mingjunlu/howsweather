@@ -1,7 +1,6 @@
 .background-overlay {
     min-height: 100vh;
     --theme-color: $blue-gradient;
-    overflow-y: hidden;
 }
 
 .background-overlay::before {
@@ -17,13 +16,13 @@
 }
 
 .background-overlay__error-messsage {
-    font-size: 2.0rem;
+    font-size: $l-minus;
     line-height: 2;
 }
 
 .status-icon__container {
     min-height: 100vh;
-    font-size: 4.0rem;
+    font-size: $xl-size;
     color: $white;
     display: flex;
     flex-direction: column;
@@ -33,7 +32,7 @@
 
 .app-container {
     color: $white;
-    padding: 3.2rem 0;
+    padding: $l-plus 0;
     max-width: 480px;
     margin: 0 auto;
 }
@@ -54,7 +53,7 @@
         margin: 0;
         max-width: 768px;
         display: grid;
-        grid-gap: 3.2rem;
+        grid-gap: $l-plus;
         grid-template-areas:
             "curr dtl"
             "rmd dtl"

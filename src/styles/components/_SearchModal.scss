@@ -11,7 +11,7 @@
 .search-modal__top-overlay {
     color: $white;
     background-color: rgba(60, 60, 60, 0.3);
-    font-size: $l-size;
+    font-size: $l-plus;
     position: fixed;
     height: 100vh;
     width: 100vw;
@@ -22,7 +22,7 @@
 }
 
 .top-overlay__icon {
-    font-size: 4.0rem;
+    font-size: $xl-size;
     animation: compass 2.2s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite alternate;
 }
 
@@ -38,7 +38,7 @@
     display: flex;
     align-items: center;
     background-color: lighten($milk-white, 5%);
-    border-radius: 0.6rem;
+    border-radius: $xxs-size;
     position: sticky;
     top: $s-size;
     box-shadow: 2px 3px 4px rgba(60, 60, 60, 0.3);
@@ -55,7 +55,7 @@
     background-color: transparent;
     outline: none;
     padding: $s-size $m-size;
-    font-size: 2.0rem;
+    font-size: $l-minus;
     color: $gray;
 }
 
@@ -82,7 +82,7 @@
     outline: none;
     color: darken($gray, 40%);
     width: 100%;
-    font-size: 2.0rem;
+    font-size: $l-minus;
 }
 
 .search-modal__matched {
@@ -123,7 +123,7 @@
 @media (min-width: 480px) {
     .search-modal__overlay {
         max-width: 480px;
-        padding: 3.2rem 1.6rem;
+        padding: $l-plus $m-size;
     }
 }
 
