@@ -13,15 +13,21 @@ class SearchModal extends React.Component {
     state = {
         isRedirecting: false,
         failedToLocate: false,
+        isSearching: false,
         isLocating: false,
         keyword: '',
+        matches: [],
         coords: ''
     }
     handleEscape = (event) => {
         if (!event.target.id && event.key === 'Escape') { this.props.handleCloseModal() }
     }
-    handleInput = (event) => {
-        this.setState({ keyword: event.target.value })
+    handleInput = async (event) => {
+        const { value } = event.target
+        this.setState({ keyword: value, isSearching: true })
+        const newKeyword = value.trim().replace(/台/g, '臺')
+        const results = await searchLocation(newKeyword, locations.default)
+        this.setState({ isSearching: false, matches: results })
     }
     handleGetPosition = async () => {
         this.setState({ isLocating: true })
@@ -44,10 +50,18 @@ class SearchModal extends React.Component {
         }
     }
     render() {
-        const { isRedirecting, failedToLocate, isLocating, keyword, coords } = this.state
+        const {
+            isRedirecting,
+            failedToLocate,
+            isSearching,
+            isLocating,
+            keyword,
+            matches,
+            coords
+        } = this.state
         const { isOpen, handleCloseModal } = this.props
         const newKeyword = keyword.trim().replace(/台/g, '臺')
-        const matches = searchLocation(newKeyword, locations.default)
+
         if (failedToLocate) { return <Error message="定位失敗" /> }
         else if (isRedirecting) { return <Redirect to={{ pathname: '/', state: { coords } }} /> }
         else if (isOpen) {
@@ -91,7 +105,13 @@ class SearchModal extends React.Component {
                                 <IconWrapper icon="location-arrow" />
                             </button>
                         </div>
-                        {newKeyword && matches.map(loc => (
+                        {isSearching && (
+                            <div className="search-modal__matched">
+                                <IconWrapper spin icon="circle-notch" className="matched__icon" />
+                                <span>搜尋中</span>
+                            </div>
+                        )}
+                        {newKeyword && !isSearching && matches.map(loc => (
                             <Link
                                 key={loc.coords}
                                 to={{ pathname: loc.path, state: { coords: loc.coords } }}
@@ -114,8 +134,8 @@ class SearchModal extends React.Component {
                                 <div className="matched__note">{loc.address}</div>
                             </Link>
                         ))}
-                        {newKeyword && matches.length < 1 && (
-                            <div className="search-modal__matched search-modal__matched--delayed">
+                        {newKeyword && !isSearching && matches.length === 0 && (
+                            <div className="search-modal__matched">
                                 <IconWrapper icon="question-circle" className="matched__icon" />
                                 <span>查無結果</span>
                             </div>
