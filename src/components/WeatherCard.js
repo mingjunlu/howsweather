@@ -13,7 +13,7 @@ const WeatherCard = ({
         <p className="weather-card__time">
             {dayjs().isSame(dayjs(time), 'hour')
                 ? '現在'
-                : new Date(time).toLocaleTimeString().slice(0, 4).replace(':', '') + '時'
+                : dayjs(time).format('Ah時').replace('AM', '上午').replace('PM', '下午')
             }
         </p>
         <p
