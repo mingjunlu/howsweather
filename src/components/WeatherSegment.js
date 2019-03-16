@@ -4,8 +4,6 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/zh-tw'
 import weatherToIcon from '../utils/weatherToIcon'
 
-dayjs.locale('zh-tw')   // 設定語系
-
 const WeatherSegment = ({
     time=null,
     note='',
@@ -16,7 +14,7 @@ const WeatherSegment = ({
 }) => (
     <div className={`weather-segment ${className}`.trim()}>
         <p className="weather-segment__day">
-            <span>{dayjs(time).format('dddd')}</span>
+            <span>{dayjs(time).locale('zh-tw').format('dddd')}</span>
             {note && <span className="weather-segment__date">今天</span>}
         </p>
         {icon && (
