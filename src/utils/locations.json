@@ -1418,7 +1418,7 @@
         "engName": "toufen",
         "path": "/miaoli/toufen/",
         "address": "苗栗縣頭份市",
-        "coords": "24.678253, 120.907348"
+        "coords": "24.678253,120.907348"
     },
     {
         "name": "後龍鎮",
@@ -1936,7 +1936,7 @@
         "engName": "taixi",
         "path": "/yunlin/taixi/",
         "address": "雲林縣臺西鄉",
-        "coords": "23.722814, 120.193520"
+        "coords": "23.722814,120.193520"
     },
     {
         "name": "元長鄉",
@@ -2433,7 +2433,7 @@
         "engName": "jian",
         "path": "/hualien/jian/",
         "address": "花蓮縣吉安鄉",
-        "coords": "23.9523713!4d121.5712309"
+        "coords": "23.952371,121.571231"
     },
     {
         "name": "瑞穗鄉",
