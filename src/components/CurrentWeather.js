@@ -1,27 +1,22 @@
 import React from 'react'
+import { WeatherContext } from '../CentralStore'
 import IconWrapper from './shared/IconWrapper'
 
-class CurrentWeather extends React.Component {
-    render() {
-        const {
-            location='天氣',
-            summary='',
-            temperature=null,
-            handleOpenModal
-        } = this.props
-        return (
+const CurrentWeather = ({ handleOpenModal }) => (
+    <WeatherContext.Consumer>
+        {({ geolocation, summary, temperature }) => (
             <div className="current">
                 <div className="current__location">
                     <div className="current__location-wrapper" onClick={handleOpenModal}>
-                        <span>{location}</span>
+                        <span>{geolocation.name}</span>
                         <IconWrapper icon="search" className="location-wrapper__icon" />
                     </div>
                 </div>
                 <p className="current__summary">{summary}</p>
                 <p className="current__temperature">{Math.round(temperature)}</p>
             </div>
-        )
-    }
-}
+        )}
+    </WeatherContext.Consumer>
+)
 
 export default CurrentWeather

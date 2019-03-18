@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import App from './components/App'
+import CentralStore from './CentralStore'
 import PageNotFound from './components/shared/PageNotFound'
 import withGeolocation from './utils/withGeolocation'
 import * as locations from './utils/locations.json'
@@ -11,11 +11,11 @@ const predefinedLocations = locations.default.map(loc => loc.path.slice(1, -1)).
 const AppRouter = () => (
     <BrowserRouter>
         <Switch>
-            <Route exact path="/" render={props => withGeolocation(App, props)} />
+            <Route exact path="/" render={props => withGeolocation(CentralStore, props)} />
             <Route
                 exact
                 path={`/(${predefinedLocations})/`}
-                render={props => withGeolocation(App, props)}
+                render={props => withGeolocation(CentralStore, props)}
             />
             <Route component={PageNotFound} />
         </Switch>
