@@ -79,11 +79,7 @@ exports.handler = function(event, context, callback) {
                 // 回傳 JSON
                 callback(null, {
                     statusCode: 200,
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-                        'Content-Type': 'application/json; charset=utf-8'
-                    },
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' },
                     body: JSON.stringify(response)
                 })
             })
