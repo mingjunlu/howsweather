@@ -21,5 +21,5 @@ REACT_APP_API_SUFFIX=lang=zh-tw&units=si&exclude=flags
 ## Start a dev server
 ```
 $ npm run lambda-serve
-$ npm run dev
+$ npm start
 ```
