@@ -1,6 +1,8 @@
 @import './base/settings';
 @import './base/base';
 @import './components/App';
+@import './components/WeatherEffectLayer';
+@import './components/RainEffect';
 @import './components/CurrentWeather';
 @import './components/WeatherSegment';
 @import './components/WeatherCard';

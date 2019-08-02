@@ -1,0 +1,18 @@
+@keyframes drop {
+    0% {
+        opacity: 1;
+        transform: translateY(0vh);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(90vh);
+    }
+}
+
+.weather-effect-layer__raindrop {
+    opacity: 0;
+    width: 0.1rem;
+    height: 1.6rem;
+    animation-name: drop;
+    animation-iteration-count: infinite;
+}

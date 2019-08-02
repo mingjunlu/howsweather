@@ -1,5 +1,6 @@
 import React from 'react'
 import { WeatherContext } from '../CentralStore'
+import WeatherEffectLayer from './WeatherEffectLayer'
 import SearchModal from './SearchModal'
 import CurrentWeather from './CurrentWeather'
 import HourlyForecast from './HourlyForecast'
@@ -39,14 +40,17 @@ class App extends React.Component {
                                 handleCloseModal={this.handleCloseModal}
                             />
                         ) : (
-                            <div className="app-container animated fadeIn fast">
-                                <CurrentWeather handleOpenModal={this.handleOpenModal} />
-                                <HourlyForecast />
-                                <DailyForecast />
-                                <Reminder />
-                                <WeatherDetails />
-                                <Footer />
-                            </div>
+                            <React.Fragment>
+                                <WeatherEffectLayer />
+                                <div className="app-container animated fadeIn fast">
+                                    <CurrentWeather handleOpenModal={this.handleOpenModal} />
+                                    <HourlyForecast />
+                                    <DailyForecast />
+                                    <Reminder />
+                                    <WeatherDetails />
+                                    <Footer />
+                                </div>
+                            </React.Fragment>
                         )}
                     </div>
                 )}
