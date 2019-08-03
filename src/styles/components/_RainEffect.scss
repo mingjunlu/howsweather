@@ -9,7 +9,19 @@
     }
 }
 
-.weather-effect-layer__raindrop {
+.rain-layer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    max-width: 768px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.rain-layer__raindrop {
     opacity: 0;
     width: 0.1rem;
     height: 1.6rem;

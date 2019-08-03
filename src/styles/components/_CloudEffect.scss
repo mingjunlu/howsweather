@@ -1,0 +1,29 @@
+@keyframes slide {
+    0% {
+        transform: translateX(var(--start-x));
+    }
+    100% {
+        transform: translateX(-2550px);
+    }
+}
+
+.cloud-layer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.cloud-layer__cloud {
+    display: block;
+    opacity: 0.65;
+    width: 5440px;
+    height: 28rem;
+    transform: translateX(var(--start-x));
+    animation: slide 550s linear 0ms infinite;
+}
+
+.cloud-layer__image {
+    height: inherit;
+}

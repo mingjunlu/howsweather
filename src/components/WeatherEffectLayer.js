@@ -1,17 +1,18 @@
 import React from 'react'
 import { WeatherContext } from '../CentralStore'
 import RainEffect from './RainEffect'
+import CloudEffect from './CloudEffect'
 
 const WeatherEffectLayer = () => (
     <WeatherContext.Consumer>
         {({ icon }) => {
             switch(icon) {
                 case 'rain':
-                    return (
-                        <div className="weather-effect-layer">
-                            <RainEffect />
-                        </div>
-                    )
+                    return <RainEffect />
+                case 'cloudy':
+                case 'partly-cloudy-day':
+                case 'partly-cloudy-night':
+                    return <CloudEffect />
                 default:
                     return null
             }

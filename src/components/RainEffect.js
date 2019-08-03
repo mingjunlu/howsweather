@@ -11,11 +11,11 @@ const raindrops = [...Array(40)].map(() => {
 })
 
 const RainEffect = () => (
-    <React.Fragment>
+    <div className="rain-layer">
         {raindrops.map(raindrop => (
             <div
                 key={raindrop.key}
-                className="weather-effect-layer__raindrop"
+                className="rain-layer__raindrop"
                 style={{
                     backgroundColor: raindrop.color,
                     animationDelay: raindrop.delay,
@@ -23,7 +23,7 @@ const RainEffect = () => (
                 }}
             />
         ))}
-    </React.Fragment>
+    </div>
 )
 
 export default RainEffect
