@@ -1,9 +1,34 @@
-@keyframes slide {
+@keyframes slide-in-first {
     0% {
-        transform: translateX(var(--start-x));
+        opacity: 0;
+        transform: translateX(50vw);
+    }
+    1% {
+        opacity: 0.65;
+    }
+    80% {
+        opacity: 0.65;
     }
     100% {
-        transform: translateX(-2550px);
+        opacity: 0;
+        transform: translateX(-150vw);
+    }
+}
+
+@keyframes slide-in-later {
+    0% {
+        opacity: 0;
+        transform: translateX(100vw);
+    }
+    1% {
+        opacity: 0.55;
+    }
+    80% {
+        opacity: 0.55;
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-150vw);
     }
 }
 
@@ -17,11 +42,22 @@
 
 .cloud-layer__cloud {
     display: block;
-    opacity: 0.65;
+    opacity: 0;
     width: 5440px;
     height: 28rem;
-    transform: translateX(var(--start-x));
-    animation: slide 550s linear 0ms infinite;
+}
+
+.cloud-layer__cloud--first {
+    animation: slide-in-first 200s linear infinite;
+    transform: translateX(50vw);
+}
+
+.cloud-layer__cloud--second {
+    animation: slide-in-later 200s linear infinite;
+    animation-delay: 80s;
+    transform: translateX(100vw);
+    position: absolute;
+    top: 0;
 }
 
 .cloud-layer__image {
