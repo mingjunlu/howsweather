@@ -49,6 +49,11 @@
     vertical-align: top;
 }
 
+.current__temperature--fake::before,
+.current__temperature--fake::after {
+    content: "";
+}
+
 @media (min-width: 768px) and (orientation: landscape) {
     .current {
         grid-area: curr;

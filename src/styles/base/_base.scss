@@ -35,6 +35,10 @@ a {
     animation-duration: 200ms;
 }
 
+.invisible {
+    visibility: hidden;
+}
+
 @media (min-width: 768px) {
     html {
         font-size: 70%;
