@@ -45,6 +45,8 @@
     opacity: 0;
     width: 5440px;
     height: 28rem;
+    user-select: none;
+    pointer-events: none;
 }
 
 .cloud-layer__cloud--first {
