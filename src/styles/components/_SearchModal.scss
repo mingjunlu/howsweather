@@ -83,7 +83,7 @@
 .search-modal__matched {
     display: flex;
     align-items: center;
-    color: darken($milk-white, 10%);
+    color: $milk-white;
     margin: 0 auto $xs-size auto;
 }
 
@@ -97,7 +97,6 @@
 }
 
 .matched__icon {
-    color: lighten($gray, 15%);
     font-size: $s-size;
     padding: $s-size 2.15rem;
 }

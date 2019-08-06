@@ -29,28 +29,25 @@ class App extends React.Component {
                 {({ icon }) => (
                     <div
                         className="background-overlay"
-                        style={{ '--theme-color': isModalOpen
-                            ? 'rgb(81, 101, 117)'
-                            : syncTheme(icon)
-                        }}
+                        style={{ '--theme-color': syncTheme(icon) }}
                     >
+                        <div style={{ visibility: isModalOpen ? 'hidden' : 'visible' }}>
+                            <WeatherEffectLayer />
+                        </div>
                         {isModalOpen ? (
                             <SearchModal
                                 isOpen={isModalOpen}
                                 handleCloseModal={this.handleCloseModal}
                             />
                         ) : (
-                            <React.Fragment>
-                                <WeatherEffectLayer />
-                                <div className="app-container animated fadeIn fast">
-                                    <CurrentWeather handleOpenModal={this.handleOpenModal} />
-                                    <HourlyForecast />
-                                    <DailyForecast />
-                                    <Reminder />
-                                    <WeatherDetails />
-                                    <Footer />
-                                </div>
-                            </React.Fragment>
+                            <div className="app-container animated fadeIn fast">
+                                <CurrentWeather handleOpenModal={this.handleOpenModal} />
+                                <HourlyForecast />
+                                <DailyForecast />
+                                <Reminder />
+                                <WeatherDetails />
+                                <Footer />
+                            </div>
                         )}
                     </div>
                 )}
